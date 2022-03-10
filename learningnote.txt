@@ -1,0 +1,2 @@
+For the boundary line, there will be only one tetrahedra. And regular edge it has two active tetrahedra.
+invalid shape configuration
