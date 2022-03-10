@@ -32,7 +32,7 @@ struct LatticeMesh : public AnimatedTetrahedonMesh<T>
 
         for(int cell_i = 0; cell_i < m_cellSize[0]; cell_i++)
         for(int cell_j = 0; cell_j < m_cellSize[1]; cell_j++)
-        for(int cell_k = 0; cell_k < m_cellSize[1]; cell_k++){
+        for(int cell_k = 0; cell_k < m_cellSize[1]; cell_k++){ //m_cellsize[2]
 
             int r = (cell_i - m_cellSize[0]/2) * (cell_i - m_cellSize[0]/2) +
                     (cell_j - m_cellSize[1]/2) * (cell_j - m_cellSize[1]/2) +
@@ -52,7 +52,7 @@ struct LatticeMesh : public AnimatedTetrahedonMesh<T>
             for(node[0] = cell[0]; node[0] <= cell[0]+1; node[0]++)
             for(node[1] = cell[1]; node[1] <= cell[1]+1; node[1]++)
             for(node[2] = cell[2]; node[2] <= cell[2]+1; node[2]++){
-                auto search = m_activeNodes.find(node);
+                auto search = m_activeNodes.find(node); // find the activite node
                 if(search == m_activeNodes.end()){ // Particle not yet created at this lattice node location -> make one
                     m_activeNodes.insert({node, m_particleX.size()});
                     m_particleX.emplace_back(m_gridDX * T(node[0]), m_gridDX * T(node[1]), m_gridDX * T(node[2]));
@@ -118,3 +118,5 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+// one possible function is to find the edge of the object by iterating the node information and if the surrending node are all on, 
+//it is in side and if it is all off, it is useless. If there are some on and some off, then it is the edge.
